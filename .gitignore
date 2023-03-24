@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Other files
+*.crf
+*.dep
+*.sct
+*.htm
