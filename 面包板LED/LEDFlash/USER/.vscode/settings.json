@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "*.m": "matlab",
-        "stm32f10x.h": "c"
-    }
-}

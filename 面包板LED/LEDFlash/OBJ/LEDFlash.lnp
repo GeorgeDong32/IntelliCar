@@ -2,6 +2,9 @@
 "..\obj\main.o"
 "..\obj\stm32f10x_it.o"
 "..\obj\system_stm32f10x.o"
+"..\obj\delay.o"
+"..\obj\sys.o"
+"..\obj\usart.o"
 "..\obj\core_cm3.o"
 "..\obj\startup_stm32f10x_hd.o"
 "..\obj\misc.o"
@@ -27,10 +30,7 @@
 "..\obj\stm32f10x_tim.o"
 "..\obj\stm32f10x_usart.o"
 "..\obj\stm32f10x_wwdg.o"
-"..\obj\delay.o"
-"..\obj\sys.o"
-"..\obj\usart.o"
 --strict --scatter "..\OBJ\LEDFlash.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
---list ".\LEDFlash.map" -o ..\OBJ\LEDFlash.axf
+--list ".\Listings\LEDFlash.map" -o ..\OBJ\LEDFlash.axf
