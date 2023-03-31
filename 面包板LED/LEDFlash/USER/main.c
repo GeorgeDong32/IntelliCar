@@ -1,4 +1,3 @@
-
 #include "stm32f10x.h"
 void Delay(u32 count)
 {
@@ -158,4 +157,6 @@ int main(void)
 	GPIO_ResetBits(GPIOA, GPIO_Pin_4);
 	GPIO_ResetBits(GPIOA, GPIO_Pin_5);
 	GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+
+	return 0;
 }

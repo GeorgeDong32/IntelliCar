@@ -61,7 +61,7 @@ typedef struct
 
 /** @defgroup CEC_Exported_Constants
   * @{
-  */ 
+  */
   
 /** @defgroup CEC_BitTiming_Mode 
   * @{

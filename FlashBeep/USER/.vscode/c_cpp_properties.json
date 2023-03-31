@@ -1,15 +1,17 @@
 {
     "configurations": [
         {
-            "name": "LEDFlash",
+            "name": "FlashBeep",
             "includePath": [
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\USER",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\CORE",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\FWLIB\\inc",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\delay",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\sys",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\usart",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\FWLIB\\src"
+                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\USER",
+                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\SYSTEM\\delay",
+                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\SYSTEM\\keysacn",
+                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\SYSTEM\\motor",
+                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\SYSTEM\\sys",
+                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\SYSTEM\\usart",
+                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\FWLIB\\inc",
+                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\CORE",
+                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\FWLIB\\src"
             ],
             "defines": [
                 "STM32F10X_HD",
