@@ -11,6 +11,8 @@
                 "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\SYSTEM\\usart",
                 "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\FWLIB\\inc",
                 "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\CORE",
+                "D:\\MyApplications\\Keil_v5\\ARM\\ARMCC\\include",
+                "D:\\MyApplications\\Keil_v5\\ARM\\ARMCC\\include\\rw",
                 "d:\\OneDrive - dong32\\Coding\\IntelliCar\\FlashBeep\\FWLIB\\src"
             ],
             "defines": [

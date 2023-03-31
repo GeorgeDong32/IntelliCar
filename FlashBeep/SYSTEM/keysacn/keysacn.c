@@ -1,75 +1,80 @@
 #include "keysacn.h"
 #include "delay.h"
-#include "stm32f10x.h"                  // Device header
-//°´¼ü³õÊ¼»¯º¯Êý 
-//PA15ºÍPC5 ÉèÖÃ³ÉÊäÈë
+#include "stm32f10x.h"
+
 void KEY_Init(void)
 {
-	GPIO_InitTypeDef GPIO_InitStructure;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);//Ê¹ÄÜPORTA,PORTCÊ±ÖÓ     
-	
-	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_2;//PC2
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; //ÉèÖÃ³ÉÉÏÀ­ÊäÈë
- 	GPIO_Init(GPIOC, &GPIO_InitStructure);//³õÊ¼»¯GPIOC2
-	
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;				 //·äÃùÆ÷PC3
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; //ÍÆÍìÊä³ö
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;//IO¿ÚËÙ¶ÈÎª50MHz
-  GPIO_Init(GPIOC, &GPIO_InitStructure);					 //¸ù¾ÝÉè¶¨²ÎÊý³õÊ¼»¯GPIOC.3
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;				       //LED0-->PA.8 ¶Ë¿ÚÅäÖÃ
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		  //ÍÆÍìÊä³ö
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;		  //IO¿ÚËÙ¶ÈÎª50MHz
-  GPIO_Init(GPIOA, &GPIO_InitStructure);					      //¸ù¾ÝÉè¶¨²ÎÊý³õÊ¼»¯GPIOA.8
-  GPIO_SetBits(GPIOA,GPIO_Pin_8);						            //PA.8 Êä³ö¸ß
+  GPIO_InitTypeDef GPIO_InitStructure;
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;	    		 //LED1-->PD.2 ¶Ë¿ÚÅäÖÃ, ÍÆÍìÊä³ö
-  GPIO_Init(GPIOA, &GPIO_InitStructure);	  				 //ÍÆÍìÊä³ö £¬IO¿ÚËÙ¶ÈÎª50MHz
-  GPIO_SetBits(GPIOA,GPIO_Pin_4); 						       //PD.2 Êä³ö¸ß 	  
-	 
-	  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;	    		 //LED1-->PD.2 ¶Ë¿ÚÅäÖÃ, ÍÆÍìÊä³ö
-  GPIO_Init(GPIOA, &GPIO_InitStructure);	  				 //ÍÆÍìÊä³ö £¬IO¿ÚËÙ¶ÈÎª50MHz
-  GPIO_SetBits(GPIOA,GPIO_Pin_5); 						       //PD.2 Êä³ö¸ß 	
-	 
-	  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;	    		 //LED1-->PD.2 ¶Ë¿ÚÅäÖÃ, ÍÆÍìÊä³ö
-  GPIO_Init(GPIOA, &GPIO_InitStructure);	  				 //ÍÆÍìÊä³ö £¬IO¿ÚËÙ¶ÈÎª50MHz
-  GPIO_SetBits(GPIOA,GPIO_Pin_6); 						       //PD.2 Êä³ö¸ß 	
+  // åˆå§‹åŒ–PC2ä¸ºä¸Šæ‹‰è¾“å…¥
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+  // åˆå§‹åŒ–PC3 Beepè„šä¸ºæŽ¨æŒ½è¾“å‡º
+  GPIO_InitStructure.GPIO_Pin = BEEP_PIN;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+  // åˆå§‹åŒ–PA8ä¸ºæŽ¨æŒ½è¾“å‡º
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+  GPIO_SetBits(GPIOA, GPIO_Pin_8);
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+  GPIO_SetBits(GPIOA, GPIO_Pin_4);
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5; // LED1-->PD.2 ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+  GPIO_SetBits(GPIOA, GPIO_Pin_5); // PD.2 ï¿½ï¿½ï¿½ï¿½ï¿½
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6; // LED1-->PD.2 ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  GPIO_Init(GPIOA, &GPIO_InitStructure);    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½IOï¿½ï¿½ï¿½Ù¶ï¿½Îª50MHz
+  GPIO_SetBits(GPIOA, GPIO_Pin_6);          // PD.2 ï¿½ï¿½ï¿½ï¿½ï¿½
 }
 
 void keysacn()
 {
-	u16 dtime = 34464;
+  u16 dtime = 1000;
   int val;
-  val=KEY;  //¶ÁÈ¡°´¼ü
-	delay_init();
-  while(!GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_2))//µ±°´¼üÃ»ÓÐ±»°´ÏÂÊ±£¬Ò»Ö±Ñ­»·
+  val = KEY;
+  delay_init();
+  while (!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
   {
-    val=KEY;//´Ê¾ä¿ÉÊ¡ÂÔ£¬¿ÉÈÃÑ­»·ÅÜ¿Õ
+    val = KEY;
   }
-  while(GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_2))//µ±°´¼ü±»°´ÏÂÊ±
+  while (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
   {
-    delay_ms(10);	  //ÑÓÊ±10ms
-    val=KEY;//¶ÁÈ¡Êý×Ö¶Ë¿ÚPC2¿ÚµçÆ½Öµ¸³¸øVal
-    if(val==1)  //µÚ¶þ´ÎÅÐ¶Ï°´¼üÊÇ·ñ±»°´ÏÂ
+    delay_ms(10);
+    val = KEY;
+    if (val == 1)
     {
-    GPIO_ResetBits(GPIOA,GPIO_Pin_4);
-		GPIO_ResetBits(GPIOA,GPIO_Pin_5);
-		GPIO_ResetBits(GPIOA,GPIO_Pin_6);
-	  GPIO_SetBits(GPIOA,GPIO_Pin_4);
-	  delay_ms(dtime);
-	  GPIO_ResetBits(GPIOA,GPIO_Pin_4);
-		GPIO_ResetBits(GPIOA,GPIO_Pin_5);
-		GPIO_ResetBits(GPIOA,GPIO_Pin_6);
-	  GPIO_SetBits(GPIOA,GPIO_Pin_5);
-		delay_ms(dtime);
-		GPIO_ResetBits(GPIOA,GPIO_Pin_4);
-		GPIO_ResetBits(GPIOA,GPIO_Pin_5);
-		GPIO_ResetBits(GPIOA,GPIO_Pin_6);
-	  GPIO_SetBits(GPIOA,GPIO_Pin_6);
-		delay_ms(dtime);
-      while(!GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_2))	//ÅÐ¶Ï°´Ê±ÊÇ·ñ±»ËÉ¿ª
-        BEEP_RESET;	//·äÃùÆ÷Í£Ö¹
+      GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+      GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+      GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+      GPIO_SetBits(GPIOA, GPIO_Pin_4);
+      delay_ms(dtime);
+      GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+      GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+      GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+      GPIO_SetBits(GPIOA, GPIO_Pin_5);
+      delay_ms(dtime);
+      GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+      GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+      GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+      GPIO_SetBits(GPIOA, GPIO_Pin_6);
+      delay_ms(dtime);
+      while (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
+        BEEP_SET;
     }
     else
-				BEEP_RESET;//·äÃùÆ÷Í£Ö¹
+      BEEP_RESET;
   }
 }
