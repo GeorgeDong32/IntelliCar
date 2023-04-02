@@ -30,7 +30,7 @@ void KEY_Init(void)
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
-  GPIO_SetBits(GPIOA, GPIO_Pin_8);
+  GPIO_ResetBits(GPIOA, GPIO_Pin_8);
 
   // 初始化PA4 LED绿
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
@@ -45,6 +45,13 @@ void KEY_Init(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
   GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+
+  // 初始化PB6
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(GPIOB, &GPIO_InitStructure);
+  GPIO_ResetBits(GPIOB, GPIO_Pin_6);
 }
 
 void keysacn()
@@ -52,79 +59,83 @@ void keysacn()
   // Define Zone
   u16 dtime = 500;
   int val;
-  GPIO_InitTypeDef GPIO_InitStructure;
   // End Define Zone
   KEY_Init();
   delay_init();
-  indicator_flash(1000);
-  delay_ms(100);
-  indicator_flash(100);
-  delay_ms(100);
 
   val = KEY;
   GPIO_ResetBits(GPIOA, GPIO_Pin_5);
   GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+  GPIO_ResetBits(GPIOA, GPIO_Pin_6);
   delay_init();
   while (!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
   {
-    indicator_flash(100);
-    delay_ms(100);
-    indicator_flash(100);
-    delay_ms(100);
-    indicator_flash(100);
+    indicator_flash(1000);
+    delay_ms(500);
     val = KEY;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-    GPIO_Init(GPIOC, &GPIO_InitStructure);
+    indicator_flash(1000);
+    delay_ms(500);
     delay_ms(20000);
   }
   while (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
   {
-    indicator_flash(100);
-    delay_ms(100);
-    indicator_flash(100);
-    delay_ms(100);
-    indicator_flash(100);
-    delay_ms(100);
-    indicator_flash(100);
+    delay_ms(500);
     val = KEY;
     if (val == 1)
     {
-      GPIO_ResetBits(GPIOA, GPIO_Pin_4);
-      GPIO_SetBits(GPIOA, GPIO_Pin_6);
-      GPIO_ResetBits(GPIOA, GPIO_Pin_8);
-      delay_ms(dtime);
-      GPIO_SetBits(GPIOA, GPIO_Pin_4);
-      GPIO_ResetBits(GPIOA, GPIO_Pin_6);
-      GPIO_ResetBits(GPIOA, GPIO_Pin_8);
-      delay_ms(dtime);
-      GPIO_ResetBits(GPIOA, GPIO_Pin_4);
-      GPIO_ResetBits(GPIOA, GPIO_Pin_6);
-      GPIO_SetBits(GPIOA, GPIO_Pin_8);
-      delay_ms(dtime);
-      while (!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
+      GPIO_SetBits(GPIOB, GPIO_Pin_6);
+      delay_ms(1000);
+      GPIO_ResetBits(GPIOB, GPIO_Pin_6);
+      val = KEY;
+      if (val == 1)
       {
-        delay_ms(1000);
-        indicator_flash(100);
-        delay_ms(100);
-        indicator_flash(1000);
-        delay_ms(100);
-        indicator_flash(1000);
-        delay_ms(100);
-        indicator_flash(100);
-        delay_ms(2000);
-        BEEP_RESET;
+        GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+        GPIO_SetBits(GPIOA, GPIO_Pin_6);
+        GPIO_ResetBits(GPIOA, GPIO_Pin_8);
+        delay_ms(dtime);
+        GPIO_SetBits(GPIOA, GPIO_Pin_4);
+        GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+        GPIO_ResetBits(GPIOA, GPIO_Pin_8);
+        delay_ms(dtime);
+        GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+        GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+        GPIO_SetBits(GPIOA, GPIO_Pin_8);
+        delay_ms(dtime);
+        GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+        GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+        GPIO_ResetBits(GPIOA, GPIO_Pin_8);
+        while (!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
+        {
+          indicator_flash(1000);
+          delay_ms(250);
+          indicator_flash(500);
+          delay_ms(250);
+          delay_ms(20000);
+        }
+      }
+      else
+      {
+        while (!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
+        {
+          BEEP_SET;
+          delay_ms(25);
+          BEEP_RESET;
+          delay_ms(100);
+          BEEP_SET;
+          delay_ms(25);
+          BEEP_RESET;
+          delay_ms(3000);
+        }
       }
     }
     else
-      BEEP_RESET;
+    {
+      GPIO_SetBits(GPIOA, GPIO_Pin_4);
+      GPIO_SetBits(GPIOA, GPIO_Pin_6);
+      GPIO_SetBits(GPIOA, GPIO_Pin_8);
+      delay_ms(3000);
+    }
   }
-
-  delay_ms(10000);
-  indicator_flash(100);
-  delay_ms(100);
-  indicator_flash(1000);
-  delay_ms(20000);
 }
 
 void indicator_flash(u16 dtime)
