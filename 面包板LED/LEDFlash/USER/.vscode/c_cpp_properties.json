@@ -9,6 +9,8 @@
                 "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\delay",
                 "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\sys",
                 "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\usart",
+                "D:\\MyApplications\\Keil_v5\\ARM\\ARMCC\\include",
+                "D:\\MyApplications\\Keil_v5\\ARM\\ARMCC\\include\\rw",
                 "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\FWLIB\\src"
             ],
             "defines": [

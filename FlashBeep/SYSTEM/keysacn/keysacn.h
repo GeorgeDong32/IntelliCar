@@ -5,6 +5,7 @@
 
 void KEY_Init(void);
 void keysacn(void);
+void indicator_flash(u16 dtime);
 
 #define BEEP_PIN GPIO_Pin_3
 #define BEEP_GPIO GPIOC

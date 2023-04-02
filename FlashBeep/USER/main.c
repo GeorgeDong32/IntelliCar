@@ -4,8 +4,7 @@
 
 int main(void)
 {
-	delay_init();
-	KEY_Init();
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOD, ENABLE); // 使能PA,PD端口时钟
 	while (1)
 	{
 		keysacn();
