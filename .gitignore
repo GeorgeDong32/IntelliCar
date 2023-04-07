@@ -37,3 +37,6 @@
 *.sct
 *.htm
 *.log
+
+# Visual Studio Code Folder
+*.vscode/
