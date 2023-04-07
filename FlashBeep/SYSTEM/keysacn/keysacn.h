@@ -14,4 +14,6 @@ void indicator_flash(u16 dtime);
 
 #define KEY GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2)
 
+#define KEY1 GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1)
+
 #endif

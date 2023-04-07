@@ -11,12 +11,17 @@ void KEY_Init(void)
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
   GPIO_Init(GPIOC, &GPIO_InitStructure);
+  // 初始化PC1为上拉输入
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
 
   // 初始化PC3 Beep脚为推挽输出
   GPIO_InitStructure.GPIO_Pin = BEEP_PIN;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(GPIOC, &GPIO_InitStructure);
+  GPIO_ResetBits(GPIOC, BEEP_PIN);
 
   // 初始化PA5 LED红
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
@@ -67,55 +72,49 @@ void keysacn()
   GPIO_ResetBits(GPIOA, GPIO_Pin_5);
   GPIO_ResetBits(GPIOA, GPIO_Pin_4);
   GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+  BEEP_RESET;
   delay_init();
-  while (!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
-  {
-    indicator_flash(1000);
-    delay_ms(500);
-    val = KEY;
-    indicator_flash(1000);
-    delay_ms(500);
-    delay_ms(20000);
-  }
-  while (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
+  if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1) || GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
   {
     delay_ms(500);
-    val = KEY;
-    if (val == 1)
+    if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
     {
-      GPIO_SetBits(GPIOB, GPIO_Pin_6);
-      delay_ms(1000);
-      GPIO_ResetBits(GPIOB, GPIO_Pin_6);
       val = KEY;
       if (val == 1)
       {
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4);
-        GPIO_SetBits(GPIOA, GPIO_Pin_6);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_8);
-        delay_ms(dtime);
-        GPIO_SetBits(GPIOA, GPIO_Pin_4);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_6);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_8);
-        delay_ms(dtime);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_6);
-        GPIO_SetBits(GPIOA, GPIO_Pin_8);
-        delay_ms(dtime);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_4);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_6);
-        GPIO_ResetBits(GPIOA, GPIO_Pin_8);
-        while (!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
+        while (1)
         {
-          indicator_flash(1000);
-          delay_ms(250);
-          indicator_flash(500);
-          delay_ms(250);
-          delay_ms(20000);
+          GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+          GPIO_SetBits(GPIOA, GPIO_Pin_6);
+          GPIO_ResetBits(GPIOA, GPIO_Pin_8);
+          delay_ms(dtime);
+          GPIO_SetBits(GPIOA, GPIO_Pin_4);
+          GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+          GPIO_ResetBits(GPIOA, GPIO_Pin_8);
+          delay_ms(dtime);
+          GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+          GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+          GPIO_SetBits(GPIOA, GPIO_Pin_8);
+          delay_ms(dtime);
+          GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+          GPIO_ResetBits(GPIOA, GPIO_Pin_6);
+          GPIO_ResetBits(GPIOA, GPIO_Pin_8);
+          while (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
+          {
+            return;
+          }
         }
       }
       else
       {
-        while (!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
+        return;
+      }
+    }
+    if (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1))
+    {
+      if (KEY1 == 1)
+      {
+        /*while (1)
         {
           BEEP_SET;
           delay_ms(25);
@@ -125,16 +124,31 @@ void keysacn()
           delay_ms(25);
           BEEP_RESET;
           delay_ms(3000);
+          while (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1))
+          {
+            return;
+          }
+        }*/
+        while (GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1))
+        {
+          BEEP_SET;
+          delay_ms(100);
+        }
+        while (!GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1))
+        {
+          BEEP_RESET;
+          return;
         }
       }
+      else
+      {
+        return;
+      }
     }
-    else
-    {
-      GPIO_SetBits(GPIOA, GPIO_Pin_4);
-      GPIO_SetBits(GPIOA, GPIO_Pin_6);
-      GPIO_SetBits(GPIOA, GPIO_Pin_8);
-      delay_ms(3000);
-    }
+  }
+  else
+  {
+    return;
   }
 }
 
