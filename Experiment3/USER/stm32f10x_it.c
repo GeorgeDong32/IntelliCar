@@ -80,7 +80,8 @@ void TIM4_IRQHandler(void)
 {
   if (TIM_GetITStatus(TIM4, TIM_IT_Update) == SET)
   {
-    // Todo: LED灯点亮或熄灭
+    /* Toggle LED1 */
+    GPIO_SetBits(GPIOA, GPIO_Pin_5);
   }
   TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
 }
