@@ -76,12 +76,20 @@ void SysTick_Handler(void)
 {
 }
 
-void TIM4_IRQHandler(void)
+void TIM2_IRQHandler(void)
 {
-  if (TIM_GetITStatus(TIM4, TIM_IT_Update) == SET)
+  static uint16_t temp;
+
+  if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
   {
-    /* Toggle LED1 */
-    GPIO_SetBits(GPIOA, GPIO_Pin_5);
+    if (temp++ % 2 == 1)
+    {
+      GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+    }
+    else
+    {
+      GPIO_SetBits(GPIOA, GPIO_Pin_5);
+    }
   }
   TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
 }
