@@ -76,7 +76,7 @@ void SysTick_Handler(void)
 {
 }
 
-void TIM2_IRQHandler(void)
+void TIM4_IRQHandler(void)
 {
   static uint16_t temp;
 
