@@ -48,8 +48,8 @@ void TIM4_Init(void)
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE); // 配置系统时钟
 
     // 初始化 TIM4 定时器
-    TIM_TimeBaseStructure.TIM_Period = 19999;                     // 设置在下一个更新事件装入活动的自动重装载寄存器ARR 的值, 计数值 20000
-    TIM_TimeBaseStructure.TIM_Prescaler = 3599;                   // 设置 TIM4 的预分频值 PSC 20KHz
+    TIM_TimeBaseStructure.TIM_Period = 300 - 1;                   // 设置在下一个更新事件装入活动的自动重装载寄存器ARR 的值, 计数值 20000
+    TIM_TimeBaseStructure.TIM_Prescaler = 240000 - 1;             // 设置 TIM4 的预分频值 PSC 20KHz
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Down; // 向下计数模式
     TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;       // 设置时钟分割
     TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);               // 根据 TIM_TimeBaseInitStruc 中指定的参数初始化 TIM4
@@ -88,7 +88,7 @@ void TIM4_PWM_Init(void)
 {
     TIM_OCInitTypeDef TIM_OCInitStructure;
     TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; // PWM 模式 1
-    TIM_OCInitStructure.TIM_Pulse = 20000 - 1;        // 设置比较值
+    TIM_OCInitStructure.TIM_Pulse = 300 - 1;          // 设置比较值
     TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
     TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
     TIM_OC2Init(TIM4, &TIM_OCInitStructure);
