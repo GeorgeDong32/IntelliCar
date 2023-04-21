@@ -78,19 +78,28 @@ void SysTick_Handler(void)
 
 void TIM4_IRQHandler(void)
 {
-  static uint16_t temp;
 
   if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
   {
-    if (temp++ % 2 == 1)
+    if (dir == 1)
     {
-      GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+      pwm++;
     }
     else
     {
-      GPIO_SetBits(GPIOA, GPIO_Pin_5);
+      pwm--;
     }
+    if (pwm > 300)
+    {
+      dir = 0;
+    }
+    if (pwm == 0)
+    {
+      dir = 1;
+    }
+    TIM_SetCompare2(TIM4, pwm);
   }
+
   TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
 }
 

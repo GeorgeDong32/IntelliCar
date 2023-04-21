@@ -41,6 +41,8 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void TIM4_IRQHandler(void);
+static u16 dir = 1;
+static u32 pwm = 0;
 
 #endif /* __STM32F10x_IT_H */
 
