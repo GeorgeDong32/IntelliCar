@@ -81,24 +81,7 @@ void TIM4_IRQHandler(void)
 
   if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
   {
-    if (dir == 1)
-    {
-      pwm++;
     }
-    else
-    {
-      pwm--;
-    }
-    if (pwm > 300)
-    {
-      dir = 0;
-    }
-    if (pwm == 0)
-    {
-      dir = 1;
-    }
-    TIM_SetCompare2(TIM4, pwm);
-  }
 
   TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
 }

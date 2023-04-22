@@ -11,6 +11,9 @@ void TIM4_PWM_Init(void);
 
 void TIM4_OutPin_Init(void);
 
+static u16 dir = 1;
+static u32 pwm = 0;
+
 int main(void)
 {
     LED_GPIO_Confing();
@@ -18,7 +21,26 @@ int main(void)
     TIME4_NVIC_Init();
     TIM4_PWM_Init();
     TIM4_OutPin_Init();
-    
+    while (1)
+    {
+        if (dir == 1)
+        {
+            pwm++;
+        }
+        else
+        {
+            pwm--;
+        }
+        if (pwm > 300)
+        {
+            dir = 0;
+        }
+        if (pwm == 0)
+        {
+            dir = 1;
+        }
+        TIM_SetCompare2(TIM4, pwm);
+    }
 }
 
 void TIM4_Init(void)
@@ -28,13 +50,13 @@ void TIM4_Init(void)
 
     // 初始化 TIM4 定时器
     // 慢但明显 200-1 7200-1; 快但不明显 100-1 7200-1
-    TIM_TimeBaseStructure.TIM_Period = 100 - 1;                   // PWM时尽量为 n * 100 - 1
-    TIM_TimeBaseStructure.TIM_Prescaler = 7200 - 1;               // 设置 TIM4 的预分频值 PSC 20KHz
-    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Down; // 向下计数模式
-    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;       // 设置时钟分割
-    TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);               // 根据 TIM_TimeBaseInitStruc 中指定的参数初始化 TIM4
-    TIM_ClearFlag(TIM4, TIM_FLAG_Update);                         // 清除溢出中断标志
-    TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);                    // 使能 TIM4 中断
+    TIM_TimeBaseStructure.TIM_Period = 100 - 1;                 // PWM时尽量为 n * 100 - 1
+    TIM_TimeBaseStructure.TIM_Prescaler = 7200 - 1;             // 设置 TIM4 的预分频值 PSC 20KHz
+    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; // 向下计数模式
+    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;     // 设置时钟分割
+    TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);             // 根据 TIM_TimeBaseInitStruc 中指定的参数初始化 TIM4
+    TIM_ClearFlag(TIM4, TIM_FLAG_Update);                       // 清除溢出中断标志
+    TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);                  // 使能 TIM4 中断
 
     TIM_Cmd(TIM4, ENABLE); // 使能 TIM4定时
 }
