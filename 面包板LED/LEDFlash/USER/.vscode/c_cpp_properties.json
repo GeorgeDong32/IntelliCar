@@ -3,15 +3,15 @@
         {
             "name": "LEDFlash",
             "includePath": [
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\USER",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\CORE",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\FWLIB\\inc",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\delay",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\sys",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\usart",
+                "d:\\OneDrive - GeorgeDong\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\USER",
+                "d:\\OneDrive - GeorgeDong\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\CORE",
+                "d:\\OneDrive - GeorgeDong\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\FWLIB\\inc",
+                "d:\\OneDrive - GeorgeDong\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\delay",
+                "d:\\OneDrive - GeorgeDong\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\sys",
+                "d:\\OneDrive - GeorgeDong\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\SYSTEM\\usart",
                 "D:\\MyApplications\\Keil_v5\\ARM\\ARMCC\\include",
                 "D:\\MyApplications\\Keil_v5\\ARM\\ARMCC\\include\\rw",
-                "d:\\OneDrive - dong32\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\FWLIB\\src"
+                "d:\\OneDrive - GeorgeDong\\Coding\\IntelliCar\\面包板LED\\LEDFlash\\FWLIB\\src"
             ],
             "defines": [
                 "STM32F10X_HD",
