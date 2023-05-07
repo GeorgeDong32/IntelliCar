@@ -12,21 +12,21 @@
 
 3. 在弹出的窗口中选择对应芯片
 
-   ![image-20230326151752172](Pics/image-20230326151752172.png)
+   ![image-20230326151752172](https://raw.githubusercontent.com/GeorgeDong32/PicGo-Storage/main/202305072205153.png)
 
 4. 在下一个界面中选择cancel
 
-   ![image-20230326151847639](Pics/image-20230326151847639.png)
+   ![image-20230326151847639](https://raw.githubusercontent.com/GeorgeDong32/PicGo-Storage/main/202305072205154.png)
 
 5. 随后双击重命名Target
 
 6. 右键进入管理项目菜单
 
-   ![image-20230326152049034](Pics/image-20230326152049034.png)
+   ![image-20230326152049034](https://raw.githubusercontent.com/GeorgeDong32/PicGo-Storage/main/202305072205155.png)
 
 7. 在下面的界面中添加组和文件
 
-   ![image-20230326152133810](Pics/image-20230326152133810.png)
+   ![image-20230326152133810](https://raw.githubusercontent.com/GeorgeDong32/PicGo-Storage/main/202305072205156.png)
 
    添加的文件都应为 `.c` 和 `.s` 文件
 
@@ -36,11 +36,11 @@
 
 1. 点击下图中红圈所示按钮
 
-   ![image-20230326152444978](Pics/image-20230326152444978.png)
+   ![image-20230326152444978](https://raw.githubusercontent.com/GeorgeDong32/PicGo-Storage/main/202305072205157.png)
 
 2. 配置C/C++编译选项
 
-   ![image-20230326152521606](Pics/image-20230326152521606.png)
+   ![image-20230326152521606](https://raw.githubusercontent.com/GeorgeDong32/PicGo-Storage/main/202305072205158.png)
 
    * Define栏填入
 
@@ -54,7 +54,7 @@
 
 3. 配置输出选项
 
-   ![image-20230326152750466](Pics/image-20230326152750466.png)
+   ![image-20230326152750466](https://raw.githubusercontent.com/GeorgeDong32/PicGo-Storage/main/202305072205160.png)
 
    * 勾选 `Create HEX File`
    * 点击 `Select Folder Objects` 按钮，将输出路径设置为`OBJ`文件夹
