@@ -564,7 +564,7 @@ ARM Macro Assembler    Page 9
               00000200 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
-ork --depend=..\obj\startup_stm32f10x_hd.d -o..\obj\startup_stm32f10x_hd.o -I"d
+ork --depend=..\obj\startup_stm32f10x_hd.d -o..\obj\startup_stm32f10x_hd.o -I"D
 :\OneDrive - GeorgeDong\Coding\IntelliCar\示例代码\2、ZYSTM32-A0 机器人前进后退
 左转右转\USER\RTE" -ID:\MyApplications\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.
 5\Device\Include -ID:\MyApplications\Keil_v5\ARM\CMSIS\Include --predefine="__U
