@@ -403,6 +403,23 @@
         </Group>
         <Group>
           <GroupName>HARDWARE</GroupName>
+          <Files>
+            <File>
+              <FileName>Motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\Motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>PWM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\PWM.c</FilePath>
+            </File>
+            <File>
+              <FileName>Servo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\Servo.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>FWLIB</GroupName>
