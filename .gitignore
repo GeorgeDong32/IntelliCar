@@ -1,0 +1,54 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Other files
+*.crf
+*.dep
+*.sct
+*.htm
+
+# Visual Studio Code Folder
+*.vscode/
+
+# FWLIB Folder
+FWLIB/*
+**/FWLIB
+
+# CORE Folder
+**/CORE
+
+# CMSIS Folder
+**/CMSIS/*
+
+# 示例代码
+**/示例代码/*
