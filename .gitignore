@@ -39,3 +39,6 @@
 
 # Visual Studio Code Folder
 *.vscode/
+
+# FWLIB Folder
+FWLIB/*
