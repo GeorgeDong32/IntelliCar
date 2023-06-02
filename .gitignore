@@ -40,15 +40,5 @@
 # Visual Studio Code Folder
 *.vscode/
 
-# FWLIB Folder
-FWLIB/*
-**/FWLIB
-
-# CORE Folder
-**/CORE
-
-# CMSIS Folder
-**/CMSIS/*
-
 # 示例代码
 **/示例代码/*
