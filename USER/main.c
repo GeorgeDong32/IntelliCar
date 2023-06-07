@@ -4,48 +4,18 @@
 #include "keysacn.h"
 #include "IRSEARCH.h"
 #include "IRAvoid.h"
+#include "usart.h"
 #include "UltrasonicWave.h"
 #include "timer.h"
 #include "Servo.h"
 
-// ????????????
-int front_detection()
-{
-
-	//	ZYSTM32_brake(0);
-	SetJointAngle(90);
-	delay_ms(100);
-	return UltrasonicWave_StartMeasure();
-}
-int left_detection()
-{
-
-	//	ZYSTM32_brake(0);
-	SetJointAngle(175);
-	delay_ms(300);
-	return UltrasonicWave_StartMeasure();
-}
-int right_detection()
-{
-
-	//	ZYSTM32_brake(0);
-	SetJointAngle(5);
-	delay_ms(300);
-	return UltrasonicWave_StartMeasure();
-}
-// extern int U_temp;
-/*
-void ZYSTM32_run(int speed,int time);       //j??????
-void ZYSTM32_brake(int time);               //???????
-void ZYSTM32_Left(int speed,int time);      //???????
-void ZYSTM32_Spin_Left(int speed,int time); //?????????
-void ZYSTM32_Right(int speed,int time);     //???????
-void ZYSTM32_Spin_Right(int speed,int time);//?????????
-void ZYSTM32_back(int speed,int time);      //???????
-*/
+int front_detection(void);
+int left_detection(void);
+int right_detection(void);
 
 int main(void)
 {
+	// Start Init Zone
 	int Q_temp, L_temp, R_temp;
 	delay_init();
 	KEY_Init();
@@ -54,42 +24,67 @@ int main(void)
 	Timerx_Init(5000, 7199);
 	UltrasonicWave_Configuration();
 	uart_init(115200);
-	TIM4_PWM_Init(7199, 0);
+	Car_Motor_Init(7199, 0);
 	TIM5_PWM_Init(9999, 143);
-	ZYSTM32_brake(500);
+	Car_brake(500);
 	keysacn();
+	// End Init Zone
+
 	while (1)
 	{
 		Q_temp = front_detection();
-		if (Q_temp < 60 && Q_temp > 0)
+		if (Q_temp < 60 && Q_temp > 0) // 前方被挡
 		{
-			ZYSTM32_brake(500);
-			ZYSTM32_back(60, 500);
-			ZYSTM32_brake(1000);
+			Car_brake(500);
+			Car_back(60, 500);
+			Car_brake(1000);
 
 			L_temp = left_detection();
 			delay_ms(500);
 			R_temp = right_detection();
 			delay_ms(500);
-
+			// 所有方向被挡
 			if ((L_temp < 60) && (R_temp < 60))
 			{
-				ZYSTM32_Spin_Left(60, 500);
+				Car_leftSpin(60, 500);
 			}
+			// 右侧被挡
 			else if (L_temp > R_temp)
 			{
-				ZYSTM32_Left(60, 700);
-				ZYSTM32_brake(500);
+				Car_left(60, 700);
+				Car_brake(500);
 			}
+			// 左侧被挡
 			else
 			{
-				ZYSTM32_Right(60, 700);
-				ZYSTM32_brake(500);
+				Car_right(60, 700);
+				Car_brake(500);
 			}
 		}
 		else
 		{
-			ZYSTM32_run(60, 10);
+			Car_forward(60, 10);
 		}
 	}
+}
+
+int front_detection()
+{
+	SetJointAngle(90);
+	delay_ms(100);
+	return UltrasonicWave_StartMeasure();
+}
+
+int left_detection()
+{
+	SetJointAngle(175);
+	delay_ms(300);
+	return UltrasonicWave_StartMeasure();
+}
+
+int right_detection()
+{
+	SetJointAngle(5);
+	delay_ms(300);
+	return UltrasonicWave_StartMeasure();
 }

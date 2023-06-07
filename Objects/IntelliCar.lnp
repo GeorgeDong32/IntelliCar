@@ -5,7 +5,6 @@
 ".\objects\iravoid.o"
 ".\objects\irsearch.o"
 ".\objects\motor.o"
-".\objects\pwm.o"
 ".\objects\servo.o"
 ".\objects\timer.o"
 ".\objects\sys.o"

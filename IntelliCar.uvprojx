@@ -420,11 +420,6 @@
               <FilePath>.\HARDWARE\Motor.c</FilePath>
             </File>
             <File>
-              <FileName>PWM.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\PWM.c</FilePath>
-            </File>
-            <File>
               <FileName>Servo.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\Servo.c</FilePath>
