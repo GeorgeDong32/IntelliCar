@@ -405,6 +405,16 @@
           <GroupName>HARDWARE</GroupName>
           <Files>
             <File>
+              <FileName>IRAvoid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\IRAvoid.c</FilePath>
+            </File>
+            <File>
+              <FileName>IRSEARCH.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\IRSEARCH.c</FilePath>
+            </File>
+            <File>
               <FileName>Motor.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\Motor.c</FilePath>
@@ -418,6 +428,31 @@
               <FileName>Servo.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\Servo.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\sys.c</FilePath>
+            </File>
+            <File>
+              <FileName>keysacn.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\keysacn.c</FilePath>
+            </File>
+            <File>
+              <FileName>UltrasonicWave.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\UltrasonicWave.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\usart.c</FilePath>
             </File>
           </Files>
         </Group>

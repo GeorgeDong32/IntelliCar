@@ -1,7 +1,8 @@
 #ifndef __SERVO_H
 #define __SERVO_H
+#include "stm32f10x.h"
 
-void Servo_Init(void);
-void Servo_SetAngle(float Angle);
+void TIM5_PWM_Init(u16 arr, u16 psc);
+void SetJointAngle(float angle);
 
 #endif
