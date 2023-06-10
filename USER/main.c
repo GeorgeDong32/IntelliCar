@@ -1,90 +1,60 @@
 #include "stm32f10x.h"
 #include "delay.h"
 #include "motor.h"
-#include "keysacn.h"
-#include "IRSEARCH.h"
-#include "IRAvoid.h"
-#include "usart.h"
-#include "UltrasonicWave.h"
-#include "timer.h"
-#include "Servo.h"
+#include "Beep.h"
+#include "ultrasonic.h"
 
-int front_detection(void);
-int left_detection(void);
-int right_detection(void);
-
-int main(void)
+int main()
 {
-	// Start Init Zone
-	int Q_temp, L_temp, R_temp;
-	delay_init();
-	KEY_Init();
-	IRSearchInit();
-	IRAvoidInit();
-	Timerx_Init(5000, 7199);
-	UltrasonicWave_Configuration();
-	uart_init(115200);
-	Car_Motor_Init(7199, 0);
-	TIM5_PWM_Init(9999, 143);
-	Car_brake(500);
-	keysacn();
-	// End Init Zone
-
+	int L_temp = 0;
+	int R_temp = 0;
+	int F_temp = 0;
+	HC_SR04Config();
+	servo_config();
+	Motor_Init(7199, 0);
+	car_brake(500);
+	Beep_Init();
+	TIM_SetCompare1(TIM2, 150);
+	delay_ms(500);
 	while (1)
 	{
-		Q_temp = front_detection();
-		if (Q_temp < 60 && Q_temp > 0) // 前方被挡
+		L_temp = 0;
+		R_temp = 0;
+		F_temp = 0;
+		F_temp = front_scan();
+		delay_ms(500);
+		if (F_temp < 25 && F_temp > 0)
 		{
-			Car_brake(500);
-			Car_back(60, 500);
-			Car_brake(1000);
-
-			L_temp = left_detection();
+			car_brake(500);
+			car_back(10, 200);
+			car_brake(1000);
+			L_temp = left_scan();
 			delay_ms(500);
-			R_temp = right_detection();
+			R_temp = right_scan();
 			delay_ms(500);
-			// 所有方向被挡
-			if ((L_temp < 60) && (R_temp < 60))
+			TIM_SetCompare1(TIM2, 150);
+			if ((L_temp < 20) && (R_temp < 20))
 			{
-				Car_leftSpin(60, 500);
+				BEEP_SET;
+				delay_ms(3000);
+				BEEP_RESET;
+				car_leftspin(40, 500);
 			}
-			// 右侧被挡
 			else if (L_temp > R_temp)
 			{
-				Car_left(60, 700);
-				Car_brake(500);
+				car_left(60, 680);
+				car_brake(500);
 			}
-			// 左侧被挡
 			else
 			{
-				Car_right(60, 700);
-				Car_brake(500);
+				car_right(60, 630);
+				car_brake(500);
 			}
 		}
 		else
 		{
-			Car_forward(60, 10);
+			TIM_SetCompare1(TIM2, 150);
+			car_forward(40, 10);
 		}
 	}
-}
-
-int front_detection()
-{
-	SetJointAngle(90);
-	delay_ms(100);
-	return UltrasonicWave_StartMeasure();
-}
-
-int left_detection()
-{
-	SetJointAngle(175);
-	delay_ms(300);
-	return UltrasonicWave_StartMeasure();
-}
-
-int right_detection()
-{
-	SetJointAngle(5);
-	delay_ms(300);
-	return UltrasonicWave_StartMeasure();
 }

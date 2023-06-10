@@ -10,6 +10,7 @@
       <TargetName>IntelliCar</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pArmCC>5050106::V5.05 update 1 (build 106)::ARMCC</pArmCC>
       <pCCUsed>5050106::V5.05 update 1 (build 106)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
@@ -317,7 +318,7 @@
             <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
-            <OneElfS>1</OneElfS>
+            <OneElfS>0</OneElfS>
             <Strict>0</Strict>
             <EnumInt>0</EnumInt>
             <PlainCh>0</PlainCh>
@@ -326,10 +327,10 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>1</uC99>
+            <uC99>0</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>3</v6Lang>
+            <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -338,9 +339,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER</Define>
+              <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\USER;.\HARDWARE;.\FWLIB\inc;.\CMSIS</IncludePath>
+              <IncludePath>.\FWLIB\inc;.\CORE;.\USER;.\HARDWARE</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -385,11 +386,6 @@
           <GroupName>USER</GroupName>
           <Files>
             <File>
-              <FileName>delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\delay.c</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\USER\main.c</FilePath>
@@ -399,35 +395,20 @@
               <FileType>1</FileType>
               <FilePath>.\USER\stm32f10x_it.c</FilePath>
             </File>
+            <File>
+              <FileName>system_stm32f10x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\system_stm32f10x.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>HARDWARE</GroupName>
           <Files>
             <File>
-              <FileName>IRAvoid.c</FileName>
+              <FileName>delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\HARDWARE\IRAvoid.c</FilePath>
-            </File>
-            <File>
-              <FileName>IRSEARCH.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\IRSEARCH.c</FilePath>
-            </File>
-            <File>
-              <FileName>Motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\Motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>Servo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\Servo.c</FilePath>
-            </File>
-            <File>
-              <FileName>timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\timer.c</FilePath>
+              <FilePath>.\HARDWARE\delay.c</FilePath>
             </File>
             <File>
               <FileName>sys.c</FileName>
@@ -435,19 +416,34 @@
               <FilePath>.\HARDWARE\sys.c</FilePath>
             </File>
             <File>
-              <FileName>keysacn.c</FileName>
+              <FileName>ultrasonic.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\HARDWARE\keysacn.c</FilePath>
+              <FilePath>.\HARDWARE\ultrasonic.c</FilePath>
             </File>
             <File>
-              <FileName>UltrasonicWave.c</FileName>
+              <FileName>Beep.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\HARDWARE\UltrasonicWave.c</FilePath>
+              <FilePath>.\HARDWARE\Beep.c</FilePath>
             </File>
             <File>
-              <FileName>usart.c</FileName>
+              <FileName>motor.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\HARDWARE\usart.c</FilePath>
+              <FilePath>.\HARDWARE\motor.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CORE</GroupName>
+          <Files>
+            <File>
+              <FileName>core_cm3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CORE\core_cm3.c</FilePath>
+            </File>
+            <File>
+              <FileName>startup_stm32f10x_hd.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\CORE\startup_stm32f10x_hd.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -568,31 +564,6 @@
               <FileName>stm32f10x_wwdg.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\FWLIB\src\stm32f10x_wwdg.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>CMSIS</GroupName>
-          <Files>
-            <File>
-              <FileName>core_cm3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS\core_cm3.c</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f10x.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS\system_stm32f10x.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>STARTUP</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_stm32f10x_hd.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\CMSIS\startup\startup_stm32f10x_hd.s</FilePath>
             </File>
           </Files>
         </Group>

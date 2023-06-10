@@ -1,11 +1,11 @@
+#include "stm32f10x.h"
 #include "motor.h"
 #include "Math.h"
 #include "delay.h"
-#include "stm32f10x.h"
 
 signed short sPWMR, sPWML, dPWM;
 
-void Car_Motor_Init(unsigned short arr, unsigned short psc)
+void Motor_Init(unsigned short arr, unsigned short psc)
 {
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
 	TIM_OCInitTypeDef TIM_OCInitStructure;
@@ -68,24 +68,24 @@ void SetMotorSpeed(unsigned char ucChannel, signed char cSpeed)
 	sPWM = 7201 - fabs(cSpeed) * 72;
 	switch (ucChannel)
 	{
-	case 0:
-		TIM_SetCompare3(TIM4, sPWM);
-		if (cSpeed > 0)
+	case 0: // right
+		TIM_SetCompare4(TIM4, sPWM);
+		if (cSpeed >= 0)
 			RIGHT_MOTOR_GO_RESET;
 		else if (cSpeed < 0)
 			RIGHT_MOTOR_GO_SET;
 		break;
-	case 1:
-		TIM_SetCompare4(TIM4, sPWM);
+	case 1: // left
+		TIM_SetCompare3(TIM4, sPWM);
 		if (cSpeed > 0)
 			LEFT_MOTOR_GO_SET;
-		else if (cSpeed < 0)
+		else if (cSpeed <= 0)
 			LEFT_MOTOR_GO_RESET;
 		break;
 	}
 }
 
-void Car_forward(signed char speed, int time)
+void car_forward(signed char speed, int time)
 {
 	signed char f_speed = -speed;
 	SetMotorSpeed(1, f_speed);
@@ -93,7 +93,7 @@ void Car_forward(signed char speed, int time)
 	delay_ms(time);
 }
 
-void Car_brake(int time)
+void car_brake(int time)
 {
 	SetMotorSpeed(1, 0);
 	SetMotorSpeed(0, 0);
@@ -102,36 +102,64 @@ void Car_brake(int time)
 	delay_ms(time);
 }
 
-void Car_left(signed char speed, int time)
+void car_left(signed char speed, int time)
 {
 	SetMotorSpeed(1, 0);
 	SetMotorSpeed(0, speed);
 	delay_ms(time);
 }
-void Car_leftSpin(signed char speed, int time)
+void car_leftspin(signed char speed, int time)
 {
 	SetMotorSpeed(1, speed);
 	SetMotorSpeed(0, speed);
 	delay_ms(time);
 }
-void Car_right(signed char speed, int time)
+void car_right(signed char speed, int time)
 {
 	signed char f_speed = -speed;
 	SetMotorSpeed(1, f_speed);
 	SetMotorSpeed(0, 0);
 	delay_ms(time);
 }
-void Car_rightSpin(signed char speed, int time)
+void car_rightspin(signed char speed, int time)
 {
 	signed char f_speed = -speed;
 	SetMotorSpeed(1, f_speed);
 	SetMotorSpeed(0, f_speed);
 	delay_ms(time);
 }
-void Car_back(signed char speed, int time)
+void car_back(signed char speed, int time)
 {
 	signed char f_speed = -speed;
-	SetMotorSpeed(1, speed);
 	SetMotorSpeed(0, f_speed);
+	SetMotorSpeed(1, speed);
 	delay_ms(time);
+}
+
+/*Test Function*/
+void car_control_test(char mode, int time)
+{
+	signed char speed = 50;
+	signed char f_speed = -50;
+	switch (mode)
+	{
+	case 0:
+		SetMotorSpeed(0, speed);
+		SetMotorSpeed(1, 0);
+		delay_ms(time);
+		SetMotorSpeed(0, f_speed);
+		SetMotorSpeed(1, 0);
+		delay_ms(time);
+		break;
+	case 1:
+		SetMotorSpeed(1, speed);
+		SetMotorSpeed(0, 0);
+		delay_ms(time);
+		SetMotorSpeed(1, (-50));
+		SetMotorSpeed(0, 0);
+		delay_ms(time);
+		break;
+	default:
+		break;
+	}
 }

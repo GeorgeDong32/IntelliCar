@@ -6,6 +6,7 @@
 *.lo
 *.o
 *.obj
+**/Objects/*
 
 # Precompiled Headers
 *.gch
@@ -30,6 +31,7 @@
 *.exe
 *.out
 *.app
+*.hex
 
 # Other files
 *.crf
@@ -42,3 +44,16 @@
 
 # 示例代码
 **/示例代码/*
+
+# Keil Project
+**/*.uvoptx
+
+# Keil Listing Folder
+**/Listings/*
+
+# FWLIB
+**/FWLIB/*
+
+# CORE & CMSIS Folder
+**/CORE/*
+**/CMSIS/*
