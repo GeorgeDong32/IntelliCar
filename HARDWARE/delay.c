@@ -1,5 +1,6 @@
 #include "delay.h"
 
+// 毫秒延迟
 void delay_ms(uint32_t ms)
 {
 	uint32_t i;
@@ -13,6 +14,7 @@ void delay_ms(uint32_t ms)
 	SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;
 }
 
+// 微秒延迟
 void delay_us(uint32_t us)
 {
 	uint32_t i;

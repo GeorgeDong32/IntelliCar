@@ -85,7 +85,7 @@ void SetMotorSpeed(unsigned char ucChannel, signed char cSpeed)
 	}
 }
 
-void car_forward(signed char speed, int time)
+void car_forward(signed char speed, int time) // 小车前进
 {
 	signed char f_speed = -speed;
 	SetMotorSpeed(1, f_speed);
@@ -93,7 +93,7 @@ void car_forward(signed char speed, int time)
 	delay_ms(time);
 }
 
-void car_brake(int time)
+void car_brake(int time) // 小车刹车
 {
 	SetMotorSpeed(1, 0);
 	SetMotorSpeed(0, 0);
@@ -102,33 +102,37 @@ void car_brake(int time)
 	delay_ms(time);
 }
 
-void car_left(signed char speed, int time)
+void car_left(signed char speed, int time) // 小车左转
 {
 	SetMotorSpeed(1, 0);
 	SetMotorSpeed(0, speed);
 	delay_ms(time);
 }
-void car_leftspin(signed char speed, int time)
+
+void car_leftspin(signed char speed, int time) // 小车左旋转
 {
 	SetMotorSpeed(1, speed);
 	SetMotorSpeed(0, speed);
 	delay_ms(time);
 }
-void car_right(signed char speed, int time)
+
+void car_right(signed char speed, int time) // 小车右转
 {
 	signed char f_speed = -speed;
 	SetMotorSpeed(1, f_speed);
 	SetMotorSpeed(0, 0);
 	delay_ms(time);
 }
-void car_rightspin(signed char speed, int time)
+
+void car_rightspin(signed char speed, int time) // 小车右旋转
 {
 	signed char f_speed = -speed;
 	SetMotorSpeed(1, f_speed);
 	SetMotorSpeed(0, f_speed);
 	delay_ms(time);
 }
-void car_back(signed char speed, int time)
+
+void car_back(signed char speed, int time) // 小车后退
 {
 	signed char f_speed = -speed;
 	SetMotorSpeed(0, f_speed);

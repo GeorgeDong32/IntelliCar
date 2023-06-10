@@ -57,3 +57,6 @@
 # CORE & CMSIS Folder
 **/CORE/*
 **/CMSIS/*
+
+# backup folder
+**/.backup/*

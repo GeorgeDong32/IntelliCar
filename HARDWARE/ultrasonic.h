@@ -1,3 +1,6 @@
+#ifndef __ULTRASONIC_H__
+#define __ULTRASONIC_H__
+
 #include "stm32f10x.h"
 #include "delay.h"
 
@@ -27,3 +30,5 @@ int front_scan(void);
 int left_scan(void);
 
 int right_scan(void);
+
+#endif

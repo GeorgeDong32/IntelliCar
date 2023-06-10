@@ -411,11 +411,6 @@
               <FilePath>.\HARDWARE\delay.c</FilePath>
             </File>
             <File>
-              <FileName>sys.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\sys.c</FilePath>
-            </File>
-            <File>
               <FileName>ultrasonic.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\ultrasonic.c</FilePath>

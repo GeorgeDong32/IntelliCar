@@ -2,6 +2,7 @@
 
 uint16_t mscount = 0;
 
+// 舵机初始化
 void servo_config(void)
 {
     GPIO_InitTypeDef GPIO_Motorinit;
@@ -32,6 +33,7 @@ void servo_config(void)
     TIM_Cmd(TIM2, ENABLE);
 }
 
+// 超声波模块初始化
 void HC_SR04Config(void)
 {
     GPIO_InitTypeDef GPIO_HCSR04init;
@@ -69,6 +71,7 @@ void HC_SR04Config(void)
     NVIC_Init(&NVIC_HCSR04init);
 }
 
+// 打开定时器5
 void Open_TIM5(void)
 {
     TIM_SetCounter(TIM5, 0);
@@ -76,11 +79,13 @@ void Open_TIM5(void)
     TIM_Cmd(TIM5, ENABLE);
 }
 
+// 关闭定时器5
 void Close_TIM5(void)
 {
     TIM_Cmd(TIM5, DISABLE);
 }
 
+// 超声波模块中断
 void TIM5_IRQHandler(void)
 {
     if (TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET)
@@ -90,6 +95,7 @@ void TIM5_IRQHandler(void)
     }
 }
 
+// 超声波回应时间
 int GetEcho_time(void)
 {
     uint32_t t = 0;
@@ -101,9 +107,9 @@ int GetEcho_time(void)
     return t;
 }
 
+// 超声波测距实现
 float GetLength(void)
 {
-
     int i = 0;
     uint32_t t = 0;
     float length = 0;
@@ -132,6 +138,7 @@ float GetLength(void)
     return length;
 }
 
+// 小车前方距离测量
 int front_scan(void)
 {
     int pwmval = 150;
@@ -140,6 +147,7 @@ int front_scan(void)
     return GetLength();
 }
 
+// 小车左侧距离测量
 int left_scan(void)
 {
     int pwmval = 250;
@@ -148,6 +156,7 @@ int left_scan(void)
     return GetLength();
 }
 
+// 小车右侧距离测量
 int right_scan(void)
 {
     int pwmval = 50;
