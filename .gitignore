@@ -60,3 +60,4 @@
 
 # backup folder
 **/.backup/*
+sync.ffs_db
