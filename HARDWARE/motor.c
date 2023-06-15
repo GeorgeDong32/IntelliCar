@@ -65,7 +65,7 @@ void SetMotorSpeed(unsigned char ucChannel, signed char cSpeed)
 	if (cSpeed <= -100)
 		cSpeed = -100;
 
-	sPWM = 7201 - fabs(cSpeed) * 72;
+	sPWM = 7201 - fabs((float)cSpeed) * 72;
 	switch (ucChannel)
 	{
 	case 0: // right

@@ -29,8 +29,6 @@ int main()
 		if (F_temp < 25 && F_temp > 0) // 前方被堵
 		{
 			/*停车检测*/
-			car_brake(500);
-			car_back(10, 200);
 			car_brake(1000);
 			L_temp = left_scan();
 			delay_ms(500);
