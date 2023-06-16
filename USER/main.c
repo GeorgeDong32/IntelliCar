@@ -26,7 +26,7 @@ int main()
 		F_temp = 0;
 		F_temp = front_scan();
 		delay_ms(500);
-		if (F_temp < 25 && F_temp > 0) // 前方被堵
+		if (F_temp < 30 && F_temp > 0) // 前方被堵
 		{
 			/*停车检测*/
 			car_brake(1000);
@@ -36,21 +36,24 @@ int main()
 			delay_ms(500);
 			TIM_SetCompare1(TIM2, 150);
 			/*End 停车检测*/
-			if ((L_temp < 20) && (R_temp < 20)) // 三侧被堵
+			if ((L_temp < 25) && (R_temp < 25)) // 三侧被堵
 			{
 				BEEP_SET;
 				delay_ms(3000);
 				BEEP_RESET;
-				car_leftspin(40, 500);
+				if (L_temp >= R_temp)
+					car_left(40, 1700);
+				else
+					car_right(40, 1700);
 			}
 			else if (L_temp > R_temp) // 右侧被堵
 			{
-				car_left(60, 680);
+				car_left(40, 1200);
 				car_brake(500);
 			}
 			else // 左侧被堵
 			{
-				car_right(60, 630);
+				car_right(40, 1200);
 				car_brake(500);
 			}
 		}
