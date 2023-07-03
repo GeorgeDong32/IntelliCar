@@ -1,5 +1,32 @@
 # IntelliCar
-智能小车-中山大学电子线路开放性实验项目
+
+> 智能小车-中山大学电子线路开放性实验项目
+>
+> Copyright (c) GeorgeDong32. All rights reserved.
+
+以STM32F103RCT6为核心的两驱超声波避障小车
+
+## 项目结构
+
+```bash
+IntelliCar
+├─CORE        #STM32 COre
+├─FWLIB       #STM32 Firmware Library
+│  ├─inc
+│  └─src
+├─HARDWARE    #外设文件
+├─Listings    #list文件
+├─Objects     #编译生成文件
+└─USER        #主程序
+```
+
+> 其中CORE和FWLIB打包在Release中，Listings和Objects文件夹需自行在本地创建
+
+## 实现功能
+
+### 超声波避障
+
+通过舵机和超声波模块实现对左前右三个方向的测距，并进行判断和行动操作。
 
 ## License
 
